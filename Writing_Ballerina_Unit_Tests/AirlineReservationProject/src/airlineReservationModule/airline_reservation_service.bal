@@ -53,7 +53,6 @@ service airlineReservationService on airlineEP {
             return;
         }
 
-        // Mock logic
         // If request is for an available flight class, send a reservation successful status
         string preferredClassStr = preferredClass.toString();
         if (equalIgnoreCase(preferredClassStr, ECONOMY) || equalIgnoreCase(preferredClassStr, BUSINESS)) {

@@ -11,7 +11,7 @@ __Testing Pyramid__
 
 The Testing Pyramid is a guideline on how different kinds of automated tests can be created depending on the program we are testing.
 
-// Have an image of the testing pyramid
+![alt text](Writing_Ballerina_Unit_Tests/Blog/Pyramid.png)
 
 There are 3 main kinds of tests that can be written keeping the Pyramid as a reference.
 
