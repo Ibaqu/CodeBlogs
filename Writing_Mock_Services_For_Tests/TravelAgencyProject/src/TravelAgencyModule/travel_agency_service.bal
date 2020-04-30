@@ -40,9 +40,12 @@ service travelReservationService on new http:Listener(9090) {
             var jsonResponse = inResponseAirline.getJsonPayload();
 
             if (jsonResponse is json) {
-                if (jsonResponse.Message == "Success") {
+                if (jsonResponse.Status == "Success") {
                     response.statusCode = 200;
                     response.setJsonPayload({"Message" : "Reservation success"});
+                } else {
+                    response.statusCode = 500;
+                    response.setJsonPayload({"Message" : "Reservation failed"});
                 }
             } else {
                 response.statusCode = 404;
@@ -69,8 +72,4 @@ function handleError(error? result) {
     if (result is error) {
         log:printError(result.reason(), err = result);
     }
-}
-
-function generatePayload(json payload) returns json|error {
-
 }

@@ -33,8 +33,39 @@ public function testReservation() {
         if (jsonResponse is json) {
             test:assertEquals(jsonResponse, expectedPayload);
         } else {
-            test:assertFail("Recieved error");
+            test:assertFail("Recieved error "+ jsonResponse.toString());
         }
     }
+}
 
+@test:Config {
+}
+public function testReservationNegative() {
+    airlineReservationEP = new("http://localhost:8081/airline");
+
+    json payload = {
+        "Name":"Alice",
+        "ArrivalDate":"12-03-2018",
+        "DepartureDate":"13-04-2018",
+        "Preference":"First"
+    };
+
+    json expectedPayload = {
+        "Message" : "Reservation failed"
+    };
+
+    http:Request request = new;
+    request.setJsonPayload(payload);
+
+    http:Response|error response = clientEP->post("/reserve", request);
+
+    if (response is http:ResponseMessage) {
+        var jsonResponse = response.getJsonPayload();
+
+        if (jsonResponse is json) {
+            test:assertEquals(jsonResponse, expectedPayload);
+        } else {
+            test:assertFail("Recieved error "+ jsonResponse.toString());
+        }
+    }
 }
