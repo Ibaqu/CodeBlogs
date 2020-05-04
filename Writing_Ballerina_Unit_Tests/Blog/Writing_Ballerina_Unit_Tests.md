@@ -36,7 +36,17 @@ In this blog we will be going through the following aspects of Unit testing in B
 
 In a Ballerina project, test cases are written in a separate directory/folder named tests. This is automatically generated when creating a new module.  It allows you to isolate the test files from the source, making it easy to maintain and execute.  In a standard Ballerina project, a module is mapped to a single test suite, and every test file within the tests folder is considered part of the same test suite.
 
-// Have an image of the program structure here
+```
+TravelAgencyProject/
+├── Ballerina.toml
+└── src
+    └── TravelAgencyModule
+        ├── tests
+        │   ├── MockServices
+        │   │   └── mock_services.bal
+        │   └── travel_agency_service_test.bal
+        └── travel_agency_service.bal
+```
 
 It is recommended to keep Unit tests within the same module that we are testing. This has the benefit of getting a more understandable code coverage when dealing with the code functionality that a Ballerina program or service can provide
 
@@ -45,7 +55,7 @@ It is recommended to keep Unit tests within the same module that we are testing.
 As with other languages, Ballerina follows a similar way of writing Unit tests.
 
 1. Define the expected and desired output of the test case
-2. Use `@test:config` to annotate the test function
+2. Use `@test:Config` to annotate the test function
 3. Call the functions you are trying to test within the test function
 4. Assert the results
 
@@ -348,4 +358,13 @@ public function endpointErrorTest() {
 
 ```
 
-Now when we generate the code coverage report, all of the negative aspects of the Ballerina code are taken into consideration as well. 
+Now when we generate the code coverage report, all of the negative aspects of the Ballerina code are taken into consideration as well.
+
+## Key Takeaways
+
+The following points sould be considered when writing Ballerina Unit tests for a Ballerina project
+
+* The Unit test cases for a Ballerina project is generally larger in number compared to the other types of tests.
+* Maintaining thorough Code coverage is important when writing Unit test cases
+* Try to maintain a clear project structure when writing tests.
+* When dealing with different types of tests, it is advisable to keep Unit tests within the same project can Integration tests in a separate project.
