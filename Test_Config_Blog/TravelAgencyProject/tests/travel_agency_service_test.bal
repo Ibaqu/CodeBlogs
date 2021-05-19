@@ -1,11 +1,8 @@
 import ballerina/test;
 import ballerina/http;
 
-
 // Create a new Client Ep under the same name with the mock url
 http:Client clientEP = check new("http://localhost:9090/travel");
-
-
 
 @test:Config {
 }

@@ -2,10 +2,9 @@ import ballerina/test;
 import ballerina/http;
 
 // HTTP Client
-http:Client clientEP = new("http://localhost:9091/airline");
+http:Client clientEP = check new ("http://localhost:9091/airline");
 
-@test:Config {
-}
+@test:Config {}
 public function equalsIgnoreCaseTest() {
 
     string string1 = "Foo";
@@ -16,8 +15,7 @@ public function equalsIgnoreCaseTest() {
     test:assertFalse(equalIgnoreCase(string1, string3));
 }
 
-@test:Config {
-}
+@test:Config {}
 public function reserveTicketTest() {
 
     // Define the test payload we will be sending to the service
@@ -43,12 +41,11 @@ public function reserveTicketTest() {
     if (response is http:Response) {
         test:assertEquals(response.getJsonPayload(), expectedPayload, "Assertion failed");
     } else {
-        test:assertFail("Recieved error : "+ response.reason());
+        test:assertFail("Recieved error : "+ response.message());
     }
 }
 
-@test:Config{
-}
+@test:Config{}
 public function incompletePayloadTest() {
     
     // Define the test payload we will be sending to the service
@@ -73,12 +70,11 @@ public function incompletePayloadTest() {
     if (response is http:Response) {
         test:assertEquals(response.getJsonPayload(), expectedPayload, "Assertion failed");
     } else {
-        test:assertFail("Recieved error : "+ response.reason());
+        test:assertFail("Recieved error : "+ response.message());
     }
 }
 
-@test:Config{
-}
+@test:Config{}
 public function endpointErrorTest() {
     
     // Define the test payload we will be sending to the service
@@ -104,6 +100,6 @@ public function endpointErrorTest() {
     if (response is http:Response) {
         test:assertEquals(response.getJsonPayload(), expectedPayload, "Assertion failed");
     } else {
-        test:assertFail("Recieved error : "+ response.reason());
+        test:assertFail("Recieved error : "+ response.message());
     }
 }
